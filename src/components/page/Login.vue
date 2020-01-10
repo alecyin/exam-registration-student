@@ -45,8 +45,8 @@ export default {
     data: function() {
         return {
             param: {
-                username: 'admin',
-                password: '123123'
+                username: '220211200104260948',
+                password: '123456'
             },
             rules: {
                 username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -63,9 +63,6 @@ export default {
                         password: this.param.password
                     };
                     auth.login(this, info);
-                    this.$message.success('登录成功');
-                    localStorage.setItem('ms_username', this.param.username);
-                    this.$router.push('/');
                 } else {
                     this.$message.error('请输入账号和密码');
                     console.log('error submit!!');

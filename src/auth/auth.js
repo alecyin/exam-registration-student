@@ -1,38 +1,41 @@
 const SERVER_URL = 'http://127.0.0.1/api'
 const LOGIN_URL = SERVER_URL+'/students/login'
 import request from '../utils/request';
-import qs from 'qs';
 export default{
     data:{
         authenticated:false
     },
-    login(context,info){
-        
+    login(context, info){
         request({
             url: '/students/login',
             method: 'post',
             info,
             headers:{
-                'Content-Type': 'application/x-www-form-urlencoded'
+                'Content-Type':'application/json;'
             },
             transformRequest: [function() {
-                return qs.stringify(info);
+                return JSON.stringify(info)
             }]
-        }).then(function(data){
-            console.log(data.bodyText)
-            localStorage.setItem('token',data.bodyText);
-            this.authenticated = true
-            this.$router.push('home')
-        },function(err){
-            console.log(err+","+err.body.message)
-            context.error = err.body.message
-        })
-
+        }).then(res => {
+            console.log(res);
+            localStorage.setItem('token', res.data[0]);
+            console.log(localStorage.getItem('token'));
+            this.authenticated = true;
+            context.$message.success('登录成功');
+            localStorage.setItem('ms_username', context.param.username);
+            context.$router.push('/');
+        }).catch(() => {
+        });
     },
     getAuthHeader(){
         return {
-            'Authorization':'Bearer '+localStorage.getItem('token')
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
+    },
+    getToken(){
+        return {
+
+        };
     },
     checkAuth(){
         var token = localStorage.getItem('token')
