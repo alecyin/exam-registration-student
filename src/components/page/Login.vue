@@ -13,8 +13,8 @@
                     >
                         <h2 class="login-form-h2">登录</h2>
                         <p class="login-form-p">请使用身份证号码登录</p>
-                        <el-form-item prop="username">
-                            <el-input v-model="param.username" placeholder="username">
+                        <el-form-item prop="idCardNumber">
+                            <el-input v-model="param.idCardNumber" placeholder="idCardNumber">
                                 <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
                             </el-input>
                         </el-form-item>
@@ -45,11 +45,11 @@ export default {
     data: function() {
         return {
             param: {
-                username: '220211200104260948',
+                idCardNumber: '220211200104260948',
                 password: '123456'
             },
             rules: {
-                username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+                idCardNumber: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
                 password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
             }
         };
@@ -59,7 +59,7 @@ export default {
             this.$refs.login.validate(valid => {
                 if (valid) {
                     var info = {
-                        idCardNumber: this.param.username,
+                        idCardNumber: this.param.idCardNumber,
                         password: this.param.password
                     };
                     auth.login(this, info);
