@@ -30,9 +30,19 @@ export default new Router({
                     meta: { title: '通知公告' }
                 },
                 {
+                    path: '/info',
+                    component: () => import(/* webpackChunkName: "info" */ '../components/page/Info.vue'),
+                    meta: { title: '个人资料' }
+                },
+                {
                     path: '/announcement/:id',
                     component: () => import(/* webpackChunkName: "announcementDetail" */ '../components/page/AnnouncementDetail.vue'),
                     meta: { title: '通知公告详情' }
+                },
+                {
+                    path: '/photo',
+                    component: () => import(/* webpackChunkName: "photo" */ '../components/page/Photo.vue'),
+                    meta: { title: '照片上传' }
                 },
                 {
                     path: '/student',

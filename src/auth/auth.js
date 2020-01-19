@@ -27,6 +27,7 @@ export default{
             };
             getUserInfo(idCardNumberInfo).then(res => {
                 localStorage.setItem('id', res.data[0].id);
+                localStorage.setItem('idCardNumber', res.data[0].idCardNumber);
                 localStorage.setItem('ms_username', res.data[0].name);
                 context.$router.push('/');
             }).catch((error) => {

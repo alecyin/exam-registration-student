@@ -19,14 +19,14 @@
                 <el-col :span="4">
                     <el-card shadow="hover" :body-style="{ padding: '50px', }">
                         <div class="card-div">
-                            <a target="_blank" href="/#/announcement">个人资料</a>
+                            <a target="_blank" href="/#/info">个人资料</a>
                         </div>
                     </el-card>
                 </el-col>
                 <el-col :span="4">
                     <el-card shadow="hover" :body-style="{ padding: '50px', }">
                         <div class="card-div">
-                            <a target="_blank" href="/#/announcement">照片上传</a>
+                            <a target="_blank" href="/#/photo">照片上传</a>
                         </div>
                     </el-card>
                 </el-col>
