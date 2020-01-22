@@ -1,5 +1,3 @@
-const SERVER_URL = 'http://127.0.0.1/api'
-const LOGIN_URL = SERVER_URL+'/students/login'
 import request from '../utils/request';
 import {getUserInfo} from '../api/user';
 export default{
@@ -22,10 +20,7 @@ export default{
             localStorage.setItem('token', res.data[0]);
             this.authenticated = true;
             context.$message.success('登录成功');
-            let idCardNumberInfo = {
-                "idCardNumber": info.idCardNumber
-            };
-            getUserInfo(idCardNumberInfo).then(res => {
+            getUserInfo().then(res => {
                 localStorage.setItem('id', res.data[0].id);
                 localStorage.setItem('idCardNumber', res.data[0].idCardNumber);
                 localStorage.setItem('ms_username', res.data[0].name);
@@ -42,9 +37,7 @@ export default{
         }
     },
     getToken(){
-        return {
-
-        };
+        return 'Bearer ' + localStorage.getItem('token');
     },
     checkAuth(){
         var token = localStorage.getItem('token')

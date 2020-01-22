@@ -1,8 +1,15 @@
 import request from '../utils/request';
 
-export const getUserInfo = idCardNumberInfo => {
+export const getUserInfo = () => {
     return request({
         url: '/students/info',
+        method: 'get'
+    });
+};
+
+export const getUserPic = idCardNumberInfo => {
+    return request({
+        url: '/students/pic',
         method: 'post',
         idCardNumberInfo,
         headers:{
