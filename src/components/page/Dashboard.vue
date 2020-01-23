@@ -33,7 +33,7 @@
                 <el-col :span="4">
                     <el-card shadow="hover" :body-style="{ padding: '50px', }">
                         <div class="card-div">
-                            <a target="_blank" href="/#/announcement">网上报名</a>
+                            <a target="_blank" href="/#/apply">网上报名</a>
                         </div>
                     </el-card>
                 </el-col>

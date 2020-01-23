@@ -45,6 +45,11 @@ export default new Router({
                     meta: { title: '照片上传' }
                 },
                 {
+                    path: '/apply',
+                    component: () => import(/* webpackChunkName: "apply" */ '../components/page/Apply.vue'),
+                    meta: { title: '网上报名' }
+                },
+                {
                     path: '/student',
                     component: () => import(/* webpackChunkName: "student" */ '../components/page/Student.vue'),
                     meta: { title: '学生管理' }
