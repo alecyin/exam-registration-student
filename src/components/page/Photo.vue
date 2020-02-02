@@ -135,7 +135,9 @@ export default {
     data() {
         return {
             userPic: {
-                "profilePic": "http://127.0.0.1/api/photo/b8401d6d4bdd402382f67c49bbf3f17c.jpg?n=0.25011032493531626"
+                "idCardPic": "default.jpg",
+                "profilePic": "default.jpg",
+                "provincialExamineePic": "default.jpg"
             },
             editVisible: false,
             form: {},

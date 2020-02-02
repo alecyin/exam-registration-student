@@ -42,7 +42,14 @@
                 <el-col :span="4" :offset="4">
                     <el-card shadow="hover" :body-style="{ padding: '50px', }">
                         <div class="card-div">
-                            <a target="_blank" href="/#/announcement">网上缴费</a>
+                            <a target="_blank" href="/#/apply-info">报名信息查看</a>
+                        </div>
+                    </el-card>
+                </el-col>
+                <el-col :span="4">
+                    <el-card shadow="hover" :body-style="{ padding: '50px', }">
+                        <div class="card-div">
+                            <a target="_blank" href="/#/pay">网上缴费</a>
                         </div>
                     </el-card>
                 </el-col>

@@ -50,6 +50,16 @@ export default new Router({
                     meta: { title: '网上报名' }
                 },
                 {
+                    path: '/apply-info',
+                    component: () => import(/* webpackChunkName: "applyInfo" */ '../components/page/ApplyInfo.vue'),
+                    meta: { title: '报名信息查看' }
+                },
+                {
+                    path: '/pay',
+                    component: () => import(/* webpackChunkName: "pay" */ '../components/page/Pay.vue'),
+                    meta: { title: '报名信息查看' }
+                },
+                {
                     path: '/student',
                     component: () => import(/* webpackChunkName: "student" */ '../components/page/Student.vue'),
                     meta: { title: '学生管理' }
