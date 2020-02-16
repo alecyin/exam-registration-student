@@ -14,12 +14,12 @@
                         <el-tab-pane label="个人免冠照">
                                 <img
                                     style="padding: 5px;width:40%;"
-                                    :src="'http://127.0.0.1/api/photo/' + userPic.idCardPic + '?n=' + Math.random()"
+                                    :src="'http://47.105.93.192/api/photo/' + userPic.idCardPic + '?n=' + Math.random()"
                                 />
                                 <div class="tip">只能上传jpg文件，且不超过2mb</div>
                                 <el-upload
                                     ref="upload1"
-                                    action="http://127.0.0.1/api/students/upload/1"
+                                    action="http://47.105.93.192/api/students/upload/1"
                                     :on-preview="handlePreview"
                                     :on-remove="handleRemove"
                                     :before-upload="beforeUpload"
@@ -46,12 +46,12 @@
                         <el-tab-pane label="手持身份证照片">
                                 <img
                                     style="padding: 5px;"
-                                    :src="'http://127.0.0.1/api/photo/' + userPic.profilePic + '?n=' + Math.random()"
+                                    :src="'http://47.105.93.192/api/photo/' + userPic.profilePic + '?n=' + Math.random()"
                                 />
                                 <div class="tip">只能上传jpg文件，且不超过2mb</div>
                                 <el-upload
                                     ref="upload2"
-                                    action="http://127.0.0.1/api/students/upload/2"
+                                    action="http://47.105.93.192/api/students/upload/2"
                                     :on-preview="handlePreview"
                                     :on-remove="handleRemove"
                                     :before-upload="beforeUpload"
@@ -78,12 +78,12 @@
                         <el-tab-pane label="省准考证照片">
                                 <img
                                     style="padding: 5px;"
-                                    :src="'http://127.0.0.1/api/photo/' + userPic.provincialExamineePic + '?n=' + Math.random()"
+                                    :src="'http://47.105.93.192/api/photo/' + userPic.provincialExamineePic + '?n=' + Math.random()"
                                 />
                                 <div class="tip">只能上传jpg文件，且不超过2mb</div>
                                 <el-upload
                                     ref="upload3"
-                                    action="http://127.0.0.1/api/students/upload/3"
+                                    action="http://47.105.93.192/api/students/upload/3"
                                     :on-preview="handlePreview"
                                     :on-remove="handleRemove"
                                     :before-upload="beforeUpload"
