@@ -41,7 +41,7 @@
 
 <script>
 import { fetchAllEnabledData, editData, fetchEnabledDataByCondition } from '../../api/base';
-import { apply, applyInfo, pay, cancelOrder } from '../../api/order';
+import { apply, applyUnpaidInfo, pay, cancelOrder } from '../../api/order';
 import { getUserInfo } from '../../api/user';
 const mode = 'orders';
 export default {
@@ -61,7 +61,7 @@ export default {
                 idCardNumber: localStorage.getItem('idCardNumber')
             };
 
-            applyInfo()
+            applyUnpaidInfo()
                 .then(res => {
                     this.tableData = res.data;
                 })

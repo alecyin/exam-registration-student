@@ -17,7 +17,14 @@
                         <el-table-column prop="examineeNumber" label="考号" width="100"></el-table-column>
                         <el-table-column prop="startTime" label="开始时间" :formatter="dateFormat"></el-table-column>
                         <el-table-column prop="endTime" label="结束时间" :formatter="dateFormat"></el-table-column>
-                        <el-table-column prop="fee" label="缴费金额/元"></el-table-column>
+                        <el-table-column prop="fee" label="缴费金额/元" width="90"></el-table-column>
+                        <el-table-column label="支付状态" align="center">
+                            <template slot-scope="scope">
+                                <el-tag
+                                    :type="scope.row.isPaid?'success':'danger'"
+                                >{{scope.row.isPaid?'已支付':'未支付'}}</el-tag>
+                            </template>
+                        </el-table-column>
                     </el-table>
                 </el-col>
             </el-row>
@@ -27,7 +34,7 @@
 
 <script>
 import { fetchAllEnabledData, editData, fetchEnabledDataByCondition } from '../../api/base';
-import { apply, applyPaidInfo } from '../../api/order';
+import { apply, applyInfo } from '../../api/order';
 import VDistpicker from 'v-distpicker';
 import { getUserInfo } from '../../api/user';
 import moment from 'moment';
@@ -47,7 +54,7 @@ export default {
     },
     methods: {
         getData() {
-            applyPaidInfo()
+            applyInfo()
                 .then(res => {
                     this.tableData = res.data;
                 })
@@ -58,10 +65,10 @@ export default {
         dateFormat(row, column) {
             var date = row[column.property];
             if (date == undefined) {
-                return "";
+                return '';
             }
-           return moment(date).format("YYYY-MM-DD HH:mm:ss");
-       }
+            return moment(date).format('YYYY-MM-DD HH:mm:ss');
+        }
     }
 };
 </script>

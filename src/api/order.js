@@ -14,17 +14,17 @@ export const apply = form => {
     });
 };
 
-export const applyInfo = () => {
+export const applyUnpaidInfo = () => {
     return request({
-        url: 'orders/apply-info',
+        url: 'orders/unpaid/apply-info',
         method: 'get'
     });
 };
 
 
-export const applyPaidInfo = () => {
+export const applyInfo = () => {
     return request({
-        url: 'orders/paid/apply-info',
+        url: 'orders/all/apply-info',
         method: 'get'
     });
 };
