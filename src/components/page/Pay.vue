@@ -15,26 +15,42 @@
                         <el-table-column prop="majorName" label="专业名称" width="180"></el-table-column>
                         <el-table-column prop="address" label="地址"></el-table-column>
                         <el-table-column prop="fee" label="应缴金额"></el-table-column>
-                        <el-table-column label="操作" align="center">
-                            <el-button type="danger" plain @click="handlePay">立即支付</el-button>
+                        <el-table-column label="操作" width="150" align="center">
+                            <template slot-scope="scope">
+                                <el-button
+                                    type="text"
+                                    icon="el-icon-edit"
+                                    @click="handlePay(scope.$index, scope.row)"
+                                >立即支付</el-button>
+                                <el-button
+                                    type="text"
+                                    icon="el-icon-delete"
+                                    class="red"
+                                    @click="handleDelete(scope.$index, scope.row)"
+                                >取消</el-button>
+                            </template>
                         </el-table-column>
                     </el-table>
                 </el-col>
             </el-row>
+        </div>
+        <div>
+            <dl v-html="jump">{{jump}}</dl>
         </div>
     </div>
 </template>
 
 <script>
 import { fetchAllEnabledData, editData, fetchEnabledDataByCondition } from '../../api/base';
-import { apply, applyInfo } from '../../api/order';
+import { apply, applyInfo, pay } from '../../api/order';
 import { getUserInfo } from '../../api/user';
 const mode = 'orders';
 export default {
     name: 'student',
     data() {
         return {
-            tableData: []
+            tableData: [],
+            jump: ''
         };
     },
     created() {
@@ -47,15 +63,33 @@ export default {
             };
 
             applyInfo()
-            .then(res => {
-                this.tableData = res.data;
-            })
-            .catch(error => {
-                console.log(error);
-            });
+                .then(res => {
+                    this.tableData = res.data;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
         },
-        handlePay() {
-            this.$message.success(`ss成功`);
+        handlePay(index, row) {
+            console.log(row);
+            pay(row)
+                .then(res => {
+                    this.jump = res.data[0];
+                    this.$message(`正在跳转...`);
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+        },
+        hanleChange() {
+            console.log('change');
+        }
+    },
+    watch: {
+        jump(val) {
+            this.$nextTick(function() {
+                document.forms[0].submit();
+            });
         }
     }
 };

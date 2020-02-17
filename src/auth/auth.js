@@ -16,7 +16,6 @@ export default{
                 return JSON.stringify(info)
             }]
         }).then(res => {
-            console.log(res);
             localStorage.setItem('token', res.data[0]);
             this.authenticated = true;
             context.$message.success('登录成功');
