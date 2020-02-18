@@ -116,9 +116,6 @@ export default {
         };
     },
     methods: {
-        handleClick() {
-            console.log("sss");
-        },
         handleEditPass() {
             this.editVisible = true;
         },
