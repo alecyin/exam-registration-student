@@ -56,7 +56,7 @@
                 <el-col :span="4">
                     <el-card shadow="hover" :body-style="{ padding: '50px', }">
                         <div class="card-div">
-                            <a target="_blank" href="/#/announcement">下载准考证</a>
+                            <a target="_blank" href="/#/download-ticket">下载准考证</a>
                         </div>
                     </el-card>
                 </el-col>
@@ -68,17 +68,13 @@
 <script>
 import Schart from 'vue-schart';
 import bus from '../common/bus';
+import {getUserInfo} from '../../api/user';
 export default {
     name: 'dashboard',
     data() {
         return {
             name: localStorage.getItem('ms_username')
         };
-    },
-    computed: {
-        role() {
-            return this.name === 'admin' ? '超级管理员' : '普通用户';
-        }
     },
     methods: {
         changeDate() {

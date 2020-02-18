@@ -56,3 +56,24 @@ export const cancelOrder = form => {
         }]
     });
 };
+
+export const applyPaidInfo = () => {
+    return request({
+        url: 'orders/paid/apply-info',
+        method: 'get'
+    });
+};
+
+export const downloadTicket = form => {
+    return request({
+        url: '/tickets/download',
+        method: 'post',
+        headers:{
+            'Content-Type':'application/json;'
+        },
+        form,
+        transformRequest: [function() {
+            return JSON.stringify(form)
+        }]
+    });
+};
