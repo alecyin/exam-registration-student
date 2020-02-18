@@ -63,11 +63,34 @@
                 <el-col :span="4">
                     <el-card shadow="hover" :body-style="{ padding: '50px', }">
                         <div class="card-div">
-                            <a target="_blank" href="/#/pass">修改密码</a>
+                            <a target="_blank" @click="handleEditPass">修改密码</a>
                         </div>
                     </el-card>
                 </el-col>
             </el-row>
+            <el-dialog title="修改密码" :visible.sync="editVisible" width="30%">
+            <el-form ref="form" :model="form" label-width="90px">
+                <el-form-item label="原密码">
+                    <el-input :type="passw1" v-model="form.oldPass">
+                        <i slot="suffix" :class="icon1" @click="showPass1"></i>
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="新密码">
+                    <el-input :type="passw2" v-model="form.newPass">
+                        <i slot="suffix" :class="icon2" @click="showPass2"></i>
+                    </el-input>
+                </el-form-item>
+                <el-form-item label="确认密码">
+                    <el-input :type="passw3" v-model="form.confirmPass">
+                        <i slot="suffix" :class="icon3" @click="showPass3"></i>
+                    </el-input>
+                </el-form-item>
+            </el-form>
+            <span slot="footer" class="dialog-footer">
+                <el-button @click="cancelEdit">取 消</el-button>
+                <el-button type="primary" @click="saveEdit">确 定</el-button>
+            </span>
+        </el-dialog>
         </div>
     </div>
 </template>
@@ -75,21 +98,72 @@
 <script>
 import Schart from 'vue-schart';
 import bus from '../common/bus';
-import {getUserInfo} from '../../api/user';
+import {updatePass} from '../../api/user';
 export default {
     name: 'dashboard',
     data() {
         return {
-            name: localStorage.getItem('ms_username')
+            name: localStorage.getItem('ms_username'),
+            dialog: {},
+            passw1: 'password',
+            passw2: 'password',
+            passw3: 'password',
+            icon1: 'el-input__icon el-icon-view',
+            icon2: 'el-input__icon el-icon-view',
+            icon3: 'el-input__icon el-icon-view',
+            form: {},
+            editVisible: false
         };
     },
     methods: {
-        changeDate() {
-            const now = new Date().getTime();
-            this.data.forEach((item, index) => {
-                const date = new Date(now - (6 - index) * 86400000);
-                item.name = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
-            });
+        handleClick() {
+            console.log("sss");
+        },
+        handleEditPass() {
+            this.editVisible = true;
+        },
+        saveEdit() {
+            if (this.form.newPass != this.form.confirmPass) {
+                this.$message.error('两次输入的新密码不一样，请重新输入');
+            } else {
+                let form =  this.form;
+                updatePass(form).then(res => {
+                    this.$message.success(`修改成功`);
+                });
+                this.editVisible = false;
+                this.form = {};
+            }
+        },
+        cancelEdit() {
+            this.editVisible = false;
+            this.form = {};
+        },
+        showPass1() {
+            if (this.passw1 == 'text') {
+                this.passw1 = 'password';
+                this.icon1 = 'el-input__icon el-icon-view';
+            } else {
+                this.passw1 = 'text';
+                this.icon1 = 'el-input__icon el-icon-loading';
+            }
+        },
+        showPass2() {
+            if (this.passw2 == 'text') {
+                this.passw2 = 'password';
+                this.icon2 = 'el-input__icon el-icon-view';
+            } else {
+                this.passw2 = 'text';
+                this.icon2 = 'el-input__icon el-icon-loading';
+            }
+        },
+        showPass3() {
+            if (this.passw3 == 'text') {
+                this.passw3 = 'password';
+                this.icon3 = 'el-input__icon el-icon-view';
+            } else {
+                this.passw3 = 'text';
+                this.icon3 = 'el-input__icon el-icon-loading';
+            }
         }
     }
 };

@@ -11,8 +11,8 @@
                         label-width="0px"
                         class="ms-content"
                     >
-                        <h2 class="login-form-h2">登录</h2>
-                        <p class="login-form-p">请使用身份证号码登录</p>
+                        <h2 class="login-form-h2">注册</h2>
+                        <p class="login-form-p">请使用身份证号码注册</p>
                         <el-form-item prop="idCardNumber">
                             <el-input v-model="param.idCardNumber" placeholder="idCardNumber">
                                 <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
@@ -29,7 +29,7 @@
                             </el-input>
                         </el-form-item>
                         <div class="login-btn">
-                            <el-button type="primary" @click="submitForm()">登录</el-button>
+                            <el-button type="primary" @click="submitForm()">注册</el-button>
                         </div>
                         <div style="text-align:right"><el-link type="primary" href="/#/reg" target="_blank">没有账号？点击注册</el-link></div>
                     </el-form>
@@ -42,6 +42,7 @@
 
 <script>
 import auth from '../../auth/auth';
+import {reg} from '../../api/user';
 export default {
     data: function() {
         return {
@@ -59,11 +60,14 @@ export default {
         submitForm() {
             this.$refs.login.validate(valid => {
                 if (valid) {
-                    var info = {
+                    var form = {
                         idCardNumber: this.param.idCardNumber,
                         password: this.param.password
                     };
-                    auth.login(this, info);
+                    reg(form).then(res => {
+                        this.$message(`注册成功！正在跳转到登录界面...`);
+                        this.$router.push({ path:'/login' })
+                    });
                 } else {
                     this.$message.error('请输入账号和密码');
                     console.log('error submit!!');

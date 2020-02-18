@@ -69,8 +69,7 @@ export default {
         return {
             collapse: false,
             fullscreen: false,
-            name: 'linxin',
-            message: 2,
+            name: 'yhf',
             dialog: {},
             passw1: 'password',
             passw2: 'password',
@@ -110,11 +109,12 @@ export default {
                     this.$message.success(`修改成功`);
                 });
                 this.editVisible = false;
+                this.form = {};
             }
         },
         cancelEdit() {
-            this.form = {};
             this.editVisible = false;
+            this.form = {};
         },
         showPass1() {
             if (this.passw1 == 'text') {

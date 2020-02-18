@@ -34,3 +34,17 @@ export const updatePass = form => {
         }]
     });
 };
+
+export const reg = form => {
+    return request({
+        url: '/students',
+        method: 'post',
+        headers:{
+            'Content-Type':'application/json;'
+        },
+        form,
+        transformRequest: [function() {
+            return JSON.stringify(form)
+        }]
+    });
+};

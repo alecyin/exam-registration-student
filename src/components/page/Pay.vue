@@ -70,7 +70,6 @@ export default {
                 });
         },
         handlePay(index, row) {
-            console.log(row);
             pay(row)
                 .then(res => {
                     this.jump = res.data[0];

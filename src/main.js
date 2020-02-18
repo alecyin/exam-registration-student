@@ -28,7 +28,7 @@ auth.checkAuth()
 router.beforeEach((to, from, next) => {
     document.title = `${to.meta.title} | 网上报名系统`;
     const role = localStorage.getItem('ms_username');
-    if (!role && to.path !== '/login') {
+    if (!role && to.path !== '/login' && to.path !== '/reg') {
         next('/login');
     } else if (to.meta.permission) {
         // 如果是管理员权限则可进入，这里只是简单的模拟管理员权限而已

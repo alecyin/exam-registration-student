@@ -60,11 +60,6 @@ export default new Router({
                     meta: { title: '下载准考证' }
                 },
                 {
-                    path: '/pass',
-                    component: () => import(/* webpackChunkName: "pass" */ '../components/page/Pass.vue'),
-                    meta: { title: '修改密码' }
-                },
-                {
                     path: '/404',
                     component: () => import(/* webpackChunkName: "404" */ '../components/page/404.vue'),
                     meta: { title: '404' }
@@ -80,6 +75,11 @@ export default new Router({
             path: '/login',
             component: () => import(/* webpackChunkName: "login" */ '../components/page/Login.vue'),
             meta: { title: '登录' }
+        },
+        {
+            path: '/reg',
+            component: () => import(/* webpackChunkName: "reg" */ '../components/page/Reg.vue'),
+            meta: { title: '注册' }
         },
         {
             path: '*',
