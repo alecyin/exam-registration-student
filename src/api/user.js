@@ -20,3 +20,17 @@ export const getUserPic = idCardNumberInfo => {
         }]
     });
 };
+
+export const updatePass = form => {
+    return request({
+        url: '/students/update-pass',
+        method: 'post',
+        headers:{
+            'Content-Type':'application/json;'
+        },
+        form,
+        transformRequest: [function() {
+            return JSON.stringify(form)
+        }]
+    });
+};

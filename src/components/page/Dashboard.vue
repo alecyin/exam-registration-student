@@ -60,6 +60,13 @@
                         </div>
                     </el-card>
                 </el-col>
+                <el-col :span="4">
+                    <el-card shadow="hover" :body-style="{ padding: '50px', }">
+                        <div class="card-div">
+                            <a target="_blank" href="/#/pass">修改密码</a>
+                        </div>
+                    </el-card>
+                </el-col>
             </el-row>
         </div>
     </div>

@@ -56,8 +56,13 @@ export default new Router({
                 },
                 {
                     path: '/download-ticket',
-                    component: () => import(/* webpackChunkName: "pay" */ '../components/page/Ticket.vue'),
+                    component: () => import(/* webpackChunkName: "ticket" */ '../components/page/Ticket.vue'),
                     meta: { title: '下载准考证' }
+                },
+                {
+                    path: '/pass',
+                    component: () => import(/* webpackChunkName: "pass" */ '../components/page/Pass.vue'),
+                    meta: { title: '修改密码' }
                 },
                 {
                     path: '/404',
