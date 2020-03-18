@@ -1,6 +1,21 @@
 <template>
     <el-container>
-        <el-header>招生院校</el-header>
+        <el-header style="height: 70px">
+            <el-row :gutter="20">
+                <el-col :span="4" :offset="4">
+                    <img
+                        style="padding: 5px;height:60px;"
+                        src="../../assets/logo.png"
+                    />
+                </el-col>
+                <el-col :span="4" :offset="8">
+                    <p style="line-height:70px;">
+                        <el-link type="primary" :underline="false" href="/#/login" target="_blank">登录 /</el-link>   
+                        <el-link type="primary" :underline="false" href="/#/reg" target="_blank">&nbsp;注册</el-link>
+                    </p>
+                </el-col>
+            </el-row>
+        </el-header>
         <el-main>
             <el-row>
                 <el-col :span="8" :offset="8">
@@ -31,12 +46,12 @@
                         <div class="login-btn">
                             <el-button type="primary" @click="submitForm()">注册</el-button>
                         </div>
-                        <div style="text-align:right"><el-link type="primary" href="/#/reg" target="_blank">没有账号？点击注册</el-link></div>
+                        <div style="text-align:right"><el-link type="primary" href="/#/login" target="_blank">已有账号？点击登录</el-link></div>
                     </el-form>
                 </el-col>
             </el-row>
         </el-main>
-        <el-footer>Copyright © 2003-2020 招生院校 All Rights Reserved</el-footer>
+        <el-footer>Copyright © 2003-2020 网上报名系统 All Rights Reserved</el-footer>
     </el-container>
 </template>
 
@@ -80,14 +95,21 @@ export default {
 </script>
 
 <style>
-.el-header,
+.el-header {
+    text-align: center;
+    height: 88px;
+    /* font-size: 20px; */
+    font-weight: 500;
+    line-height: 88px;
+    padding: 0 20px;
+}
 .el-footer {
     background-color: #b3c0d1;
-    color: #333;
+    color: #666;
     text-align: left;
-    line-height: 86px;
+    line-height: 80px;
     width: 100%;
-    height: 86px;
+    height: 80px;
     background: #fff;
 }
 

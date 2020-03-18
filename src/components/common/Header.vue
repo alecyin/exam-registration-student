@@ -1,26 +1,24 @@
 <template>
     <div class="header">
-        <div class="logo">Title</div>
+        <div>
+            <el-row :gutter="20">
+                <el-col :span="4" :offset="4">
+                    <img
+                        style="padding: 5px;height:30px;"
+                        src="../../assets/logo.png"
+                    />
+                </el-col>
+                <el-col :span="8" :offset="4">
+                    <p style="line-height:40px;float:right">
+                        <el-link :underline="false" href="/#/dashboard" target="_blank">首页&nbsp;&nbsp;</el-link>
+                        <el-link :underline="false" href="/#/info" target="_blank">{{username}}&nbsp;&nbsp;</el-link>  
+                        <el-link :underline="false" @click="handleCommand('loginout')" target="_blank">登出</el-link>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </p>
+                </el-col>
+            </el-row>
+        </div>
         <div class="header-right">
             <div class="header-user-con">
-                <!-- 消息中心 -->
-                <!-- <div class="btn-bell">
-                    <el-tooltip
-                        effect="dark"
-                        :content="message?`有${message}条未读消息`:`消息中心`"
-                        placement="bottom"
-                    >
-                        <router-link to="/tabs">
-                            <i class="el-icon-bell"></i>
-                        </router-link>
-                    </el-tooltip>
-                    <span class="btn-bell-badge" v-if="message"></span>
-                </div>-->
-                <!-- 用户头像 -->
-                <!-- <div class="user-avator">
-                    <img src="../../assets/img/img.jpg" />
-                </div>-->
-                <!-- 用户名下拉菜单 -->
                 <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
                         {{username}}
