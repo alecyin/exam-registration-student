@@ -192,16 +192,28 @@ export default {
             return isJPG && isLt2M;
         },
         uploadSuccess1(response, file, fileList) {
+            if (response.code == 60204) {
+                this.$message.error(response.message);
+                return;
+            }
             this.$message.success('上传成功');
             this.$refs.upload1.clearFiles();
             this.getData();
         },
         uploadSuccess2(response, file, fileList) {
+            if (response.code == 60204) {
+                this.$message.error(response.message);
+                return;
+            }
             this.$message.success('上传成功');
             this.$refs.upload2.clearFiles();
             this.getData();
         },
         uploadSuccess3(response, file, fileList) {
+            if (response.code == 60204) {
+                this.$message.error(response.message);
+                return;
+            }
             this.$message.success('上传成功');
             this.$refs.upload3.clearFiles();
             this.getData();

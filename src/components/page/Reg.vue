@@ -3,15 +3,22 @@
         <el-header style="height: 70px">
             <el-row :gutter="20">
                 <el-col :span="4" :offset="4">
-                    <img
-                        style="padding: 5px;height:60px;"
-                        src="../../assets/logo.png"
-                    />
+                    <img style="padding: 5px;height:60px;" src="../../assets/logo.png" />
                 </el-col>
                 <el-col :span="4" :offset="8">
                     <p style="line-height:70px;">
-                        <el-link type="primary" :underline="false" href="/#/login" target="_blank">登录 /</el-link>   
-                        <el-link type="primary" :underline="false" href="/#/reg" target="_blank">&nbsp;注册</el-link>
+                        <el-link
+                            type="primary"
+                            :underline="false"
+                            href="/#/login"
+                            target="_blank"
+                        >登录 /</el-link>
+                        <el-link
+                            type="primary"
+                            :underline="false"
+                            href="/#/reg"
+                            target="_blank"
+                        >&nbsp;注册</el-link>
                     </p>
                 </el-col>
             </el-row>
@@ -46,7 +53,9 @@
                         <div class="login-btn">
                             <el-button type="primary" @click="submitForm()">注册</el-button>
                         </div>
-                        <div style="text-align:right"><el-link type="primary" href="/#/login" target="_blank">已有账号？点击登录</el-link></div>
+                        <div style="text-align:right">
+                            <el-link type="primary" href="/#/login" target="_blank">已有账号？点击登录</el-link>
+                        </div>
                     </el-form>
                 </el-col>
             </el-row>
@@ -57,17 +66,49 @@
 
 <script>
 import auth from '../../auth/auth';
-import {reg} from '../../api/user';
+import { reg } from '../../api/user';
 export default {
     data: function() {
+        var isCardId = (rule, value, callback) => {
+            if (!value) {
+                return new Error('请输入身份证号)');
+            } else {
+                const reg = /^\d{6}(18|19|20)?\d{2}(0[1-9]|1[0-2])(([0-2][1-9])|10|20|30|31)\d{3}(\d|X|x)$/;
+                const card = reg.test(value);
+                if (!card) {
+                    //判断座机为12位
+                    callback(new Error('身份证格式错误'));
+                } else {
+                    callback();
+                }
+            }
+        };
         return {
             param: {
                 idCardNumber: '220211200104260948',
                 password: '123456'
             },
             rules: {
-                idCardNumber: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-                password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+                idCardNumber: [
+                    { required: true, message: '请输入身份证号', trigger: 'blur' },
+                    { validator: isCardId, trigger: 'blur' }
+                ],
+                password: [
+                    {
+                        required: true,
+                        message: '请输入密码',
+                        trigger: 'blur'
+                    },
+                    {
+                        min: 6,
+                        max: 30,
+                        message: '长度在 6 到 30 个字符'
+                    },
+                    {
+                        pattern: /^(\w){6,20}$/,
+                        message: '只能输入6-20个字母、数字、下划线'
+                    }
+                ]
             }
         };
     },
@@ -81,11 +122,9 @@ export default {
                     };
                     reg(form).then(res => {
                         this.$message(`注册成功！正在跳转到登录界面...`);
-                        this.$router.push({ path:'/login' })
+                        this.$router.push({ path: '/login' });
                     });
                 } else {
-                    this.$message.error('请输入账号和密码');
-                    console.log('error submit!!');
                     return false;
                 }
             });
