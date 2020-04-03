@@ -197,16 +197,25 @@ export default {
         },
         handleEdit() {
             this.form = Object.assign({}, this.userInfo);
-            let area = this.userInfo.address.split('|', 4);
-            this.form.address = area.slice(0, 3).join('|');
-            console.log(area);
-            this.select = {
-                province: area[0],
-                city: area[1],
-                area: area[2]
-            };
-            this.form.specific = area[3];
-            this.editVisible = true;
+            if (this.userInfo.address == undefined) {
+                this.select = {
+                    province: '北京市',
+                    city: '北京城区',
+                    area: '东城区'
+                };
+                this.form.specific = "";
+                this.editVisible = true;
+            } else {   
+                let area = this.userInfo.address.split('|', 4);
+                this.form.address = area.slice(0, 3).join('|');
+                this.select = {
+                    province: area[0],
+                    city: area[1],
+                    area: area[2]
+                };
+                this.form.specific = area[3];
+                this.editVisible = true;
+            }            
         },
         // 保存编辑
         saveEdit() {
