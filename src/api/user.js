@@ -37,7 +37,7 @@ export const updatePass = form => {
 
 export const reg = form => {
     return request({
-        url: '/students',
+        url: '/students/reg',
         method: 'post',
         headers:{
             'Content-Type':'application/json;'
