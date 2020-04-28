@@ -37,7 +37,7 @@
                                     >保存</el-button>
                                 </el-upload>
                         </el-tab-pane>
-                        <el-tab-pane label="手持身份证照片">
+                        <el-tab-pane label="身份证照片">
                                 <img
                                     style="padding: 5px;"
                                     :src="'http://47.105.93.192/api/photo/' + userPic.profilePic + '?n=' + Math.random()"

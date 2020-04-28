@@ -5,19 +5,19 @@
             <el-row :gutter="20">
                 <el-col :span="16" :offset="4">
                     <el-table :data="tableData" border style="width: 100%">
-                        <el-table-column prop="siteName" label="考点名称" width="100"></el-table-column>
-                        <el-table-column prop="address" label="地址" width="200"></el-table-column>
-                        <el-table-column prop="majorName" label="专业名称" width="180"></el-table-column>
-                        <el-table-column prop="examineeNumber" label="考号" width="100"></el-table-column>
-                        <el-table-column prop="startTime" label="开始时间" :formatter="dateFormat"></el-table-column>
-                        <el-table-column prop="endTime" label="结束时间" :formatter="dateFormat"></el-table-column>
-                        <el-table-column label="操作" width="200" header-align="center">
+                        <el-table-column prop="siteName" label="考点名称" header-align="center" width="100"></el-table-column>
+                        <el-table-column prop="address" label="地址" header-align="center" width="200"></el-table-column>
+                        <el-table-column prop="majorName" label="专业名称" header-align="center" width="100"></el-table-column>
+                        <el-table-column prop="examineeNumber" width="110" align="center" label="考号"></el-table-column>
+                        <el-table-column prop="startTime" label="开始时间" width="150" align="center" :formatter="dateFormat"></el-table-column>
+                        <el-table-column prop="endTime" label="结束时间" width="150" align="center" :formatter="dateFormat"></el-table-column>
+                        <el-table-column label="操作" width="191" align="center">
                             <template slot-scope="scope">
                                 <el-button
                                 size="mini"
                                 type="primary"
                                     @click="handleDownload(scope.$index, scope.row)"
-                                >下载准考证</el-button>
+                                >查看准考证</el-button>
                             </template>
                         </el-table-column>
                     </el-table>
@@ -61,14 +61,15 @@ export default {
                 });
         },
         handleDownload(index, row) {
-            downloadTicket(row)
-                .then(res => {
-                    console.log(res.data[0].pdfPath);
-                    window.location.href = "http://47.105.93.192/api/ticket/" + res.data[0].pdfPath + '?n=' + Math.random();
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            window.location.href = "/#/ticket-detail/" + row.orderId;
+            // downloadTicket(row)
+            //     .then(res => {
+            //         console.log(res.data[0].pdfPath);
+            //         window.location.href = "http://47.105.93.192/api/ticket/" + res.data[0].pdfPath + '?n=' + Math.random();
+            //     })
+            //     .catch(error => {
+            //         console.log(error);
+            //     });
         },
         dateFormat(row, column) {
             var date = row[column.property];

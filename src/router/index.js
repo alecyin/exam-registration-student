@@ -60,6 +60,11 @@ export default new Router({
                     meta: { title: '下载准考证' }
                 },
                 {
+                    path: '/ticket-detail/:id',
+                    component: () => import(/* webpackChunkName: "ticketDetail" */ '../components/page/TicketDetail.vue'),
+                    meta: { title: '准考证详情' }
+                },
+                {
                     path: '/404',
                     component: () => import(/* webpackChunkName: "404" */ '../components/page/404.vue'),
                     meta: { title: '404' }
