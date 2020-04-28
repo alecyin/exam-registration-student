@@ -61,8 +61,8 @@ export default {
     data: function() {
         return {
             param: {
-                idCardNumber: '220211200104260948',
-                password: '123456'
+                idCardNumber: '370830199811147212',
+                password: '370830199811147212'
             },
             rules: {
                 idCardNumber: [{ required: true, message: '请输入用户名', trigger: 'blur' }],

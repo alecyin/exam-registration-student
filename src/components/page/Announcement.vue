@@ -1,19 +1,27 @@
 <template>
+    
+</template>
+<template>
     <div>
-        <div class="title-div">
+        <!-- <div class="title-div">
             <el-row :gutter="20">
                 <el-col :span="4" :offset="4">
                     <h1 class="title">通知公告</h1>
                 </el-col>
             </el-row>
-        </div>
+        </div>-->
+        <navbar v-bind:activeIndex="'1'"></navbar>
         <div class="content-div">
             <el-row :gutter="20">
                 <el-col :span="16" :offset="4">
                     <el-card class="box-card" shadow="never">
                         <p v-for="announcement in tableData" :key="announcement.id">
-                            <el-link :href="'/#/announcement/' + announcement.id">{{announcement.title }}</el-link>
-                            <el-divider content-position="right">{{announcement.createTime | dateFormat }}</el-divider>
+                            <el-link
+                                :href="'/#/announcement/' + announcement.id"
+                            >{{announcement.title }}</el-link>
+                            <el-divider
+                                content-position="right"
+                            >{{announcement.createTime | dateFormat }}</el-divider>
                         </p>
                     </el-card>
                     <div class="pagination">
@@ -34,6 +42,7 @@
 
 <script>
 import { fetchData } from '../../api/base';
+import navbar from '../common/navbar.vue'
 import moment from 'moment';
 const mode = 'announcements';
 export default {
@@ -50,6 +59,9 @@ export default {
             idx: -1,
             id: -1
         };
+    },
+    components: {
+        navbar
     },
     created() {
         this.getData();

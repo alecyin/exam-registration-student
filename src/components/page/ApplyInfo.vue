@@ -1,12 +1,6 @@
 <template>
     <div>
-        <div class="title-div">
-            <el-row :gutter="20">
-                <el-col :span="4" :offset="4">
-                    <h1 class="title">报名信息查看</h1>
-                </el-col>
-            </el-row>
-        </div>
+        <navbar v-bind:activeIndex="'5'"></navbar>
         <div class="content-div">
             <el-row :gutter="20">
                 <el-col :span="16" :offset="4">
@@ -33,6 +27,7 @@
 </template>
 
 <script>
+import navbar from '../common/navbar.vue'
 import { fetchAllEnabledData, editData, fetchEnabledDataByCondition } from '../../api/base';
 import { apply, applyInfo } from '../../api/order';
 import VDistpicker from 'v-distpicker';
@@ -47,7 +42,8 @@ export default {
         };
     },
     components: {
-        VDistpicker
+        VDistpicker,
+        navbar
     },
     created() {
         this.getData();
@@ -77,7 +73,9 @@ export default {
 .el-divider {
     margin: 12px 0;
 }
-
+.el-menu-item {
+    padding: 0 17px;
+}
 .title-div {
     margin-bottom: 30px;
     border-bottom: 2px solid #1787e0;

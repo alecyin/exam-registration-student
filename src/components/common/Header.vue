@@ -10,9 +10,9 @@
                 </el-col>
                 <el-col :span="8" :offset="4">
                     <p style="line-height:40px;float:right">
-                        <el-link :underline="false" href="/#/dashboard">首页&nbsp;&nbsp;</el-link>
-                        <el-link :underline="false" href="/#/info" target="_blank">{{username}}&nbsp;&nbsp;</el-link>  
-                        <el-link :underline="false" @click="handleCommand('loginout')">登出</el-link>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <!-- <el-link :underline="false" href="/#/dashboard">首页&nbsp;&nbsp;</el-link>
+                        <el-link :underline="false" href="/#/info" target="_blank">{{username}}&nbsp;&nbsp;</el-link>   -->
+                        <!-- <el-link :underline="false" @click="handleCommand('loginout')">登出</el-link>&nbsp;&nbsp;&nbsp;&nbsp; -->
                     </p>
                 </el-col>
             </el-row>

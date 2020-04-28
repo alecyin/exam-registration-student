@@ -1,19 +1,12 @@
 <template>
     <div>
-        <div class="title-div">
-            <el-row :gutter="20">
-                <el-col :span="4" :offset="4">
-                    <h1 class="title">通知公告详情</h1>
-                </el-col>
-            </el-row>
-        </div>
+        <navbar v-bind:activeIndex="'1'"></navbar>
         <div class="content-div">
             <el-row :gutter="20">
                 <el-col :span="16" :offset="4">
                     <el-card class="box-card" shadow="never">
                         <div slot="header" class="clearfix">
                             <el-breadcrumb separator-class="el-icon-arrow-right">
-                                <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                                 <el-breadcrumb-item :to="{ path: '/announcement' }">通知公告</el-breadcrumb-item>
                                 <el-breadcrumb-item>通知公告详情</el-breadcrumb-item>
                             </el-breadcrumb>
@@ -31,6 +24,7 @@
 </template>
 
 <script>
+import navbar from '../common/navbar.vue'
 import { fetchData, fetchDataById } from '../../api/base';
 import moment from 'moment';
 const mode = 'announcements';
@@ -40,6 +34,9 @@ export default {
         return {
             announcement: []
         };
+    },
+    components: {
+        navbar
     },
     created() {
         this.getData();
@@ -68,7 +65,9 @@ export default {
 .el-divider {
     margin: 12px 0;
 }
-
+.el-menu-item {
+    padding: 0 17px;
+}
 .title-div {
     margin-bottom: 30px;
     border-bottom: 2px solid #1787e0;

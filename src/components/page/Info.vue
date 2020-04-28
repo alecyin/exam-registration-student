@@ -1,12 +1,6 @@
 <template>
     <div>
-        <div class="title-div">
-            <el-row :gutter="20">
-                <el-col :span="4" :offset="4">
-                    <h1 class="title">个人资料</h1>
-                </el-col>
-            </el-row>
-        </div>
+         <navbar v-bind:activeIndex="'2-1'"></navbar>
         <div class="content-div">
             <el-row :gutter="20">
                 <el-col :span="16" :offset="4">
@@ -29,6 +23,11 @@
                         <el-row>
                             <el-col :span="3">手机号码：</el-col>
                             <strong>{{userInfo.phone}}</strong>
+                        </el-row>
+                        <el-divider></el-divider>
+                        <el-row>
+                            <el-col :span="3">省准考证号码</el-col>
+                            <strong>{{userInfo.provincialExamineeNumber}}</strong>
                         </el-row>
                         <el-divider></el-divider>
                         <el-row>
@@ -56,7 +55,7 @@
 
         <!-- 修改弹出框 -->
         <el-dialog :title="'修改'" :visible.sync="editVisible" width="40%">
-            <el-form :model="form" :rules="rules" ref="form" label-width="100px">
+            <el-form :model="form" :rules="rules" ref="form" label-width="110px">
                 <el-form-item label="姓名" prop="name">
                     <el-input v-model="form.name"></el-input>
                 </el-form-item>
@@ -69,6 +68,9 @@
                 </el-form-item>
                 <el-form-item label="手机号码" prop="phone">
                     <el-input v-model="form.phone"></el-input>
+                </el-form-item>
+                <el-form-item label="省准考证号码" prop="provincialExamineeNumber">
+                    <el-input v-model="form.provincialExamineeNumber"></el-input>
                 </el-form-item>
                 <el-form-item label="邮箱" prop="email">
                     <el-input v-model="form.email"></el-input>
@@ -97,6 +99,7 @@
 </template>
 
 <script>
+import navbar from '../common/navbar.vue'
 import { editData } from '../../api/base';
 import VDistpicker from 'v-distpicker';
 import { getUserInfo } from '../../api/user';
@@ -165,6 +168,7 @@ export default {
                     { validator: isMobileNumber, trigger: 'blur' }
                 ],
                 school: [{ required: true, message: '请输入学校', trigger: 'blur' }],
+                provincialExamineeNumber: [{ required: true, message: '请输入省准考证号码', trigger: 'blur' }],
                 idCardNumber: [
                     { required: true, message: '请输入身份证号', trigger: 'blur' },
                     { validator: isCardId, trigger: 'blur' }
@@ -177,7 +181,8 @@ export default {
         };
     },
     components: {
-        VDistpicker
+        VDistpicker,
+        navbar
     },
     created() {
         this.getData();
@@ -203,7 +208,7 @@ export default {
                     city: '北京城区',
                     area: '东城区'
                 };
-                this.form.specific = "";
+                this.form.specific = "北京市|北京城区|东城区";
                 this.editVisible = true;
             } else {   
                 let area = this.userInfo.address.split('|', 4);
@@ -221,16 +226,14 @@ export default {
         saveEdit() {
             this.$refs.form.validate(valid => {
                 if (valid) {
-                    this.editVisible = false;
                     let form = this.form;
-                    console.log(form);
                     form.address += '|' + this.form.specific;
-                    console.log(form);
                     editData({ mode, form })
                         .then(() => {
                             this.$message.success(`修改成功`);
                             this.userInfo = this.form;
                             localStorage.setItem('ms_username', form.name);
+                            this.editVisible = false;
                         })
                         .catch(() => {
                             this.$message.error(`保存失败`);
@@ -256,7 +259,9 @@ export default {
 .el-divider {
     margin: 12px 0;
 }
-
+.el-menu-item {
+    padding: 0 17px;
+}
 .title-div {
     margin-bottom: 30px;
     border-bottom: 2px solid #1787e0;
@@ -266,6 +271,9 @@ export default {
     font-size: 30px;
     letter-spacing: 2px;
     color: #1787e0;
+}
+.el-menu-item {
+    padding: 0 17px;
 }
 .el-row {
     margin-bottom: 20px;

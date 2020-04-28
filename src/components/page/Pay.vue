@@ -1,12 +1,6 @@
 <template>
     <div>
-        <div class="title-div">
-            <el-row :gutter="20">
-                <el-col :span="4" :offset="4">
-                    <h1 class="title">网上缴费</h1>
-                </el-col>
-            </el-row>
-        </div>
+        <navbar v-bind:activeIndex="'6'"></navbar>
         <div class="content-div">
             <el-row :gutter="20">
                 <el-col :span="16" :offset="4">
@@ -40,6 +34,7 @@
 </template>
 
 <script>
+import navbar from '../common/navbar.vue'
 import { fetchAllEnabledData, editData, fetchEnabledDataByCondition } from '../../api/base';
 import { apply, applyUnpaidInfo, pay, cancelOrder } from '../../api/order';
 import { getUserInfo } from '../../api/user';
@@ -54,6 +49,9 @@ export default {
     },
     created() {
         this.getData();
+    },
+    components: {
+        navbar
     },
     methods: {
         getData() {
@@ -109,6 +107,9 @@ export default {
 .title-div {
     margin-bottom: 30px;
     border-bottom: 2px solid #1787e0;
+}
+.el-menu-item {
+    padding: 0 17px;
 }
 .title {
     line-height: 40px;

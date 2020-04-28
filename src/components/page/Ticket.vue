@@ -1,12 +1,6 @@
 <template>
     <div>
-        <div class="title-div">
-            <el-row :gutter="20">
-                <el-col :span="4" :offset="4">
-                    <h1 class="title">下载准考证</h1>
-                </el-col>
-            </el-row>
-        </div>
+         <navbar v-bind:activeIndex="'7'"></navbar>
         <div class="content-div">
             <el-row :gutter="20">
                 <el-col :span="16" :offset="4">
@@ -34,6 +28,7 @@
 </template>
 
 <script>
+import navbar from '../common/navbar.vue'
 import { fetchAllEnabledData, editData, fetchEnabledDataByCondition } from '../../api/base';
 import { apply, applyPaidInfo, downloadTicket } from '../../api/order';
 import VDistpicker from 'v-distpicker';
@@ -49,7 +44,8 @@ export default {
         };
     },
     components: {
-        VDistpicker
+        VDistpicker,
+        navbar
     },
     created() {
         this.getData();
@@ -99,6 +95,9 @@ export default {
     font-size: 30px;
     letter-spacing: 2px;
     color: #1787e0;
+}
+.el-menu-item {
+    padding: 0 17px;
 }
 .el-row {
     margin-bottom: 20px;

@@ -45,6 +45,12 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+Vue.prototype.logout = function() {
+    // localStorage.removeItem('ms_username');
+    localStorage.clear();
+    this.$router.push('/login');
+}
+
 new Vue({
     router,
     i18n,
