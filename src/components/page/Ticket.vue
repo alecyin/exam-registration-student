@@ -11,7 +11,7 @@
                         <el-table-column prop="examineeNumber" label="考号" width="100"></el-table-column>
                         <el-table-column prop="startTime" label="开始时间" :formatter="dateFormat"></el-table-column>
                         <el-table-column prop="endTime" label="结束时间" :formatter="dateFormat"></el-table-column>
-                        <el-table-column label="操作" width="200" align="center">
+                        <el-table-column label="操作" width="200" header-align="center">
                             <template slot-scope="scope">
                                 <el-button
                                 size="mini"

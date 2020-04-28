@@ -12,7 +12,7 @@
                         <el-table-column prop="startTime" label="开始时间" :formatter="dateFormat"></el-table-column>
                         <el-table-column prop="endTime" label="结束时间" :formatter="dateFormat"></el-table-column>
                         <el-table-column prop="fee" label="缴费金额/元" width="90"></el-table-column>
-                        <el-table-column label="支付状态" align="center">
+                        <el-table-column label="支付状态" header-align="center">
                             <template slot-scope="scope">
                                 <el-tag
                                     :type="scope.row.isPaid?'success':'danger'"

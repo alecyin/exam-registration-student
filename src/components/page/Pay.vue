@@ -9,7 +9,7 @@
                         <el-table-column prop="address" label="地址" width="260"></el-table-column>
                         <el-table-column prop="majorName" label="专业名称" width="180"></el-table-column>
                         <el-table-column prop="fee" label="应缴金额/元"></el-table-column>
-                        <el-table-column label="操作" width="200" align="center">
+                        <el-table-column label="操作" width="200" header-align="center">
                             <template slot-scope="scope">
                                 <el-button
                                 size="mini"
