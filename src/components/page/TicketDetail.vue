@@ -35,7 +35,7 @@
                         </tr>
                         <tr>
                             <td>准考证号码</td>
-                            <td colspan="2">{{data.student.name}}</td>
+                            <td colspan="2">{{data.number}}</td>
                         </tr>
                         <tr>
                             <td>身份证号码</td>

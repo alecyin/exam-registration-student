@@ -71,7 +71,6 @@ export default {
             pay(row)
                 .then(res => {
                     this.jump = res.data[0];
-                    this.$message(`正在跳转...`);
                 })
                 .catch(error => {
                     console.log(error);
@@ -91,7 +90,9 @@ export default {
     },
     watch: {
         jump(val) {
+            this.$message(`正在跳转...`);
             this.$nextTick(function() {
+                document.getElementsByName("punchout_form")[0].target="_blank";
                 document.forms[0].submit();
             });
         }
