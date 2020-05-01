@@ -3,15 +3,22 @@
         <el-header style="height: 70px">
             <el-row :gutter="20">
                 <el-col :span="4" :offset="4">
-                    <img
-                        style="padding: 5px;height:60px;"
-                        src="../../assets/logo.png"
-                    />
+                    <img style="padding: 5px;height:60px;" src="../../assets/logo.png" />
                 </el-col>
                 <el-col :span="4" :offset="8">
                     <p style="line-height:70px;">
-                        <el-link type="primary" :underline="false" href="/#/login" target="_blank">登录 /</el-link>   
-                        <el-link type="primary" :underline="false" href="/#/reg" target="_blank">&nbsp;注册</el-link>
+                        <el-link
+                            type="primary"
+                            :underline="false"
+                            href="/#/login"
+                            target="_blank"
+                        >登录 /</el-link>
+                        <el-link
+                            type="primary"
+                            :underline="false"
+                            href="/#/reg"
+                            target="_blank"
+                        >&nbsp;注册</el-link>
                     </p>
                 </el-col>
             </el-row>
@@ -43,10 +50,31 @@
                                 <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
                             </el-input>
                         </el-form-item>
+                        <el-form-item>
+                            <el-form-item prop="verifycode">
+                                <el-input
+                                    v-model="param.verifycode"
+                                    placeholder="请输入验证码"
+                                    class="identifyinput"
+                                >
+                                    <el-button slot="prepend" icon="el-icon-chat-round"></el-button>
+                                </el-input>
+                            </el-form-item>
+                            <div class="identifybox">
+                                <div @click="refreshCode">
+                                    <s-identify :identifyCode="identifyCode"></s-identify>
+                                </div>
+                                <!-- 刷新验证码 -->
+                                <el-button @click="refreshCode" type="text" class="textbtn">看不清，换一张</el-button>
+                            </div>
+                        </el-form-item>
+
                         <div class="login-btn">
                             <el-button type="primary" @click="submitForm()">登录</el-button>
                         </div>
-                        <div style="text-align:right"><el-link type="primary" href="/#/reg" target="_blank">没有账号？点击注册</el-link></div>
+                        <div style="text-align:right">
+                            <el-link type="primary" href="/#/reg" target="_blank">没有账号？点击注册</el-link>
+                        </div>
                     </el-form>
                 </el-col>
             </el-row>
@@ -57,20 +85,55 @@
 
 <script>
 import auth from '../../auth/auth';
+import SIdentify from '../common/RandomCode';
 export default {
     data: function() {
+        // 自定义验证规则：验证码验证规则
+        const validateVerifycode = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入验证码'));
+            } else if (value !== this.identifyCode) {
+                console.log('validateVerifycode:', value);
+                callback(new Error('验证码不正确'));
+            } else {
+                callback();
+            }
+        };
         return {
             param: {
                 idCardNumber: '370830199811147212',
-                password: '370830199811147212'
+                password: '370830199811147212',
+                verifycode: ''
             },
+            identifyCode: '',
+            identifyCodes: '1234567890',
             rules: {
                 idCardNumber: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-                password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+                password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+                verifycode: [{ required: true, trigger: 'blur', validator: validateVerifycode }]
             }
         };
     },
+    components: {
+        SIdentify
+    },
     methods: {
+        // 生成随机数
+        randomNum(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        },
+        // 切换验证码
+        refreshCode() {
+            this.identifyCode = '';
+            this.makeCode(this.identifyCodes, 4);
+        },
+        // 生成四位随机验证码
+        makeCode(o, l) {
+            for (let i = 0; i < l; i++) {
+                this.identifyCode += this.identifyCodes[this.randomNum(0, this.identifyCodes.length)];
+            }
+            console.log(this.identifyCode);
+        },
         submitForm() {
             this.$refs.login.validate(valid => {
                 if (valid) {
@@ -80,12 +143,16 @@ export default {
                     };
                     auth.login(this, info);
                 } else {
-                    this.$message.error('请输入账号和密码');
+                    this.refreshCode();
                     console.log('error submit!!');
                     return false;
                 }
             });
+            this.refreshCode();
         }
+    },
+    mounted() {
+        this.refreshCode();
     }
 };
 </script>
@@ -159,5 +226,10 @@ body > .el-container {
     width: 100%;
     height: 36px;
     margin-bottom: 10px;
+}
+.identifybox {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 7px;
 }
 </style>

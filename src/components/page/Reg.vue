@@ -50,6 +50,24 @@
                                 <el-button slot="prepend" icon="el-icon-lx-lock"></el-button>
                             </el-input>
                         </el-form-item>
+                        <el-form-item>
+                            <el-form-item prop="verifycode">
+                                <el-input
+                                    v-model="param.verifycode"
+                                    placeholder="请输入验证码"
+                                    class="identifyinput"
+                                >
+                                    <el-button slot="prepend" icon="el-icon-chat-round"></el-button>
+                                </el-input>
+                            </el-form-item>
+                            <div class="identifybox">
+                                <div @click="refreshCode">
+                                    <s-identify :identifyCode="identifyCode"></s-identify>
+                                </div>
+                                <!-- 刷新验证码 -->
+                                <el-button @click="refreshCode" type="text" class="textbtn">看不清，换一张</el-button>
+                            </div>
+                        </el-form-item>
                         <div class="login-btn">
                             <el-button type="primary" @click="submitForm()">注册</el-button>
                         </div>
@@ -67,6 +85,7 @@
 <script>
 import auth from '../../auth/auth';
 import { reg } from '../../api/user';
+import SIdentify from '../common/RandomCode';
 export default {
     data: function() {
         var isCardId = (rule, value, callback) => {
@@ -83,16 +102,30 @@ export default {
                 }
             }
         };
+        const validateVerifycode = (rule, value, callback) => {
+            if (value === '') {
+                callback(new Error('请输入验证码'));
+            } else if (value !== this.identifyCode) {
+                console.log('validateVerifycode:', value);
+                callback(new Error('验证码不正确'));
+            } else {
+                callback();
+            }
+        };
         return {
             param: {
                 idCardNumber: '220211200104260948',
-                password: '123456'
+                password: '123456',
+                verifycode: ''
             },
+            identifyCode: '',
+            identifyCodes: '1234567890',
             rules: {
                 idCardNumber: [
                     { required: true, message: '请输入身份证号', trigger: 'blur' },
                     { validator: isCardId, trigger: 'blur' }
                 ],
+
                 password: [
                     {
                         required: true,
@@ -108,11 +141,31 @@ export default {
                         pattern: /^(\w){6,20}$/,
                         message: '只能输入6-20个字母、数字、下划线'
                     }
-                ]
+                ],
+                verifycode: [{ required: true, trigger: 'blur', validator: validateVerifycode }]
             }
         };
     },
+    components: {
+        SIdentify
+    },
     methods: {
+        // 生成随机数
+        randomNum(min, max) {
+            return Math.floor(Math.random() * (max - min) + min);
+        },
+        // 切换验证码
+        refreshCode() {
+            this.identifyCode = '';
+            this.makeCode(this.identifyCodes, 4);
+        },
+        // 生成四位随机验证码
+        makeCode(o, l) {
+            for (let i = 0; i < l; i++) {
+                this.identifyCode += this.identifyCodes[this.randomNum(0, this.identifyCodes.length)];
+            }
+            console.log(this.identifyCode);
+        },
         submitForm() {
             this.$refs.login.validate(valid => {
                 if (valid) {
@@ -125,10 +178,15 @@ export default {
                         this.$router.push({ path: '/login' });
                     });
                 } else {
+                    this.refreshCode();
                     return false;
                 }
             });
+            this.refreshCode();
         }
+    },
+    mounted() {
+        this.refreshCode();
     }
 };
 </script>
@@ -202,5 +260,10 @@ body > .el-container {
     width: 100%;
     height: 36px;
     margin-bottom: 10px;
+}
+.identifybox {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 7px;
 }
 </style>
