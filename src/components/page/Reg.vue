@@ -36,14 +36,14 @@
                         <h2 class="login-form-h2">注册</h2>
                         <p class="login-form-p">请使用身份证号码注册</p>
                         <el-form-item prop="idCardNumber">
-                            <el-input v-model="param.idCardNumber" placeholder="idCardNumber">
+                            <el-input v-model="param.idCardNumber" placeholder="身份证号码">
                                 <el-button slot="prepend" icon="el-icon-lx-people"></el-button>
                             </el-input>
                         </el-form-item>
                         <el-form-item prop="password">
                             <el-input
                                 type="password"
-                                placeholder="password"
+                                placeholder="密码"
                                 v-model="param.password"
                                 @keyup.enter.native="submitForm()"
                             >
@@ -114,8 +114,8 @@ export default {
         };
         return {
             param: {
-                idCardNumber: '220211200104260948',
-                password: '123456',
+                idCardNumber: '',
+                password: '',
                 verifycode: ''
             },
             identifyCode: '',

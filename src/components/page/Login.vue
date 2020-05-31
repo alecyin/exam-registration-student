@@ -101,8 +101,8 @@ export default {
         };
         return {
             param: {
-                idCardNumber: '370830199811147212',
-                password: '370830199811147212',
+                idCardNumber: '370682199810137569',
+                password: '370682199810137569',
                 verifycode: ''
             },
             identifyCode: '',
